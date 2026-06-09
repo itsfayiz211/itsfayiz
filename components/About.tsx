@@ -18,26 +18,7 @@ export default function About() {
         <div className="md:w-1/2 w-full space-y-6 text-center md:text-left">
 
           <p className="text-base sm:text-lg md:text-xl leading-relaxed sm:leading-loose">
-            I’m a{" "}
-            <span className="text-cyan-400 font-semibold">
-              MERN Stack Developer
-            </span>{" "}
-            who focuses on building real-world applications rather than just UI demos. I’ve developed full-stack projects like a{" "}
-            <span className="text-cyan-400 font-semibold">
-              trading journal with authentication and analytics
-            </span>{" "}
-            and a{" "}
-            <span className="text-cyan-400 font-semibold">
-              real-time chat application using Socket.IO
-            </span>.
-          </p>
-
-          <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed sm:leading-loose">
-            I enjoy solving practical problems, working with live data, and building features that simulate real production systems. My experience includes designing secure APIs, handling authentication, and developing responsive, user-friendly interfaces.
-          </p>
-
-          <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed sm:leading-loose">
-            Beyond coding, I focus on improving performance, refining UI/UX, and continuously learning better ways to build scalable and maintainable applications.
+            As a skilled <span className="text-cyan-400 font-semibold">MERN Stack & Next.js Developer</span> with 1+ year of experience building real-world projects, I specialize in creating scalable, efficient, and user-friendly web applications. I’m eager to bring my expertise in full-stack development and problem-solving to innovative projects that drive business success and improve user experiences.
           </p>
 
         </div>

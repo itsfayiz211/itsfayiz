@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
+import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 
 // Import your images
 import portfolioImage from "@/public/assets/portfolio.png";
@@ -64,21 +65,16 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 3;
-
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, easing: "ease-in-out" });
   }, []);
 
-  const totalPages = Math.ceil(projects.length / cardsPerPage);
-  const startIndex = (currentPage - 1) * cardsPerPage;
-  const currentProjects = projects.slice(startIndex, startIndex + cardsPerPage);
+  const currentProjects = projects;
 
   return (
     <section
       id="projects"
-      className="bg-black text-white py-16 px-6 md:px-20 lg:px-32 min-h-screen"
+      className="bg-black text-white py-16 px-6 md:px-20 lg:px-32 min-h-[140vh]"
     >
       {/* Heading */}
       <div  className="text-center mb-12">
@@ -90,75 +86,67 @@ export default function Projects() {
         </p>
       </div>
 
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {currentProjects.map((project, index) => (
-          <div
-            key={index}
-            data-aos="fade-up"
-            data-aos-delay={index * 150}
-            className="relative bg-neutral-950 rounded-xl overflow-hidden shadow-lg"
-          >
-            {/* Image */}
-            <Image
-              src={project.image}
-              alt={project.title}
-              // data-aos="fade-up"
-              width={400}
-              height={250}
-              className="w-full h-56 object-cover"
-            />
+      <div className="mx-auto max-w-6xl">
+        <ScrollStack
+          className="w-full"
+          itemDistance={70}
+          itemScale={0.035}
+          itemStackDistance={35}
+          baseScale={0.88}
+          stackPosition="18%"
+          scaleEndPosition="10%"
+          useWindowScroll={true}
+        >
+          {currentProjects.map((project, index) => (
+            <ScrollStackItem
+              key={project.title}
+              itemClassName="overflow-hidden rounded-[28px] border border-white/10 bg-neutral-950"
+            >
+              <article
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="group relative h-88 w-full overflow-hidden rounded-[28px] bg-neutral-950 sm:h-96"
+              >
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={500}
+                  height={420}
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                />
 
-            {/* Always-visible overlay */}
-            <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center p-4">
-              <h3 className="text-xl font-bold mb-2">
-                {project.title}
-              </h3>
-              <p className="text-sm text-gray-300 mb-4">
-                {project.description}
-              </p>
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/85 to-black/20" />
 
-              <div className="flex gap-4">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-md text-sm shadow-lg shadow-cyan-500/30 transition"
-                >
-                  GitHub
-                </a>
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md text-sm shadow-lg shadow-emerald-500/30 transition"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
+                <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-5 text-left md:p-6">
+                  <p className="text-[11px] uppercase tracking-[0.35em] text-cyan-200/90">Featured project</p>
+                  <h3 className="mt-2 text-2xl font-semibold text-white md:text-3xl">{project.title}</h3>
+                  <p className="mt-3 max-w-md text-sm text-gray-200 md:text-[15px]">{project.description}</p>
+
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full bg-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-600"
+                    >
+                      GitHub
+                    </a>
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-600"
+                    >
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </ScrollStackItem>
+          ))}
+        </ScrollStack>
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center mt-10 gap-2">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentPage(index + 1)}
-            // data-aos="zoom-in"
-            // data-aos-delay={index * 100}
-            className={`px-4 py-2 rounded-md text-sm font-medium border ${
-              currentPage === index + 1
-                ? "bg-white text-black border-neutral-500"
-                : "bg-black text-white border-gray-300 hover:bg-neutral-900"
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
     </section>
   );
 }

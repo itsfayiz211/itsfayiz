@@ -38,6 +38,7 @@ const skillDescriptions: Record<string, string> = {
 
 export default function Skills() {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const marqueeSkills = [...skills, ...skills];
 
   return (
     <section
@@ -48,53 +49,59 @@ export default function Skills() {
         Skills
       </h1>
 
-      {/* ── Skills Grid ── */}
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-5 md:gap-8 w-full max-w-5xl">
-        {skills.map((skill) => {
-          const isActive = activeSkill === skill.name;
+      {/* ── Skills Marquee ── */}
+      <div className="w-full max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4 shadow-[0_18px_35px_rgba(0,0,0,0.25)] backdrop-blur-md">
+        <div
+          className="flex w-max gap-4 md:gap-6"
+          style={{ animation: "marquee 24s linear infinite" }}
+          onMouseEnter={(e) => (e.currentTarget.style.animationPlayState = "paused")}
+          onMouseLeave={(e) => (e.currentTarget.style.animationPlayState = "running")}
+        >
+          {marqueeSkills.map((skill, index) => {
+            const isActive = activeSkill === skill.name;
 
-          return (
-            <div
-              key={skill.id}
-              onClick={() => setActiveSkill(skill.name)}
-              className="flex flex-col items-center cursor-pointer transition-transform duration-150 hover:-translate-y-0.5"
-            >
-              <div
-                className={`
-                  relative
-                  w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24
-                  rounded-xl overflow-hidden
-                  flex items-center justify-center
-                  transition-all duration-300
-                  ${skill.bgClass || ""}
-                  ${isActive
-                    ? "ring-2 ring-cyan-400 shadow-[0_0_20px_#06b6d4]"
-                    : "shadow-lg hover:shadow-xl"}
-                `}
+            return (
+              <button
+                type="button"
+                key={`${skill.id}-${index}`}
+                onClick={() => setActiveSkill(skill.name)}
+                className="flex w-24 shrink-0 flex-col items-center rounded-2xl border border-white/10 bg-black/60 px-3 py-3 text-center transition duration-200 hover:-translate-y-0.5 hover:border-cyan-400/60 hover:bg-black/80 sm:w-28 md:w-32"
               >
-                <Image
-                  src={skill.icon}
-                  alt={skill.name}
-                  fill
-                  sizes="(max-width: 640px) 64px,
-                         (max-width: 768px) 80px,
-                         (max-width: 1024px) 96px,
-                         96px"
-                  className="object-contain p-2"
-                />
-              </div>
+                <div
+                  className={`relative h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 sm:h-16 sm:w-16 md:h-18 md:w-18 ${skill.bgClass || ""} ${
+                    isActive
+                      ? "ring-2 ring-cyan-400 shadow-[0_0_20px_#06b6d4]"
+                      : "shadow-lg hover:shadow-xl"
+                  }`}
+                >
+                  <Image
+                    src={skill.icon}
+                    alt={skill.name}
+                    fill
+                    sizes="56px"
+                    className="object-contain p-2"
+                  />
+                </div>
 
-              <p
-                className={`mt-2 text-xs sm:text-sm md:text-base transition ${
-                  isActive ? "text-cyan-400" : "text-gray-300"
-                }`}
-              >
-                {skill.name}
-              </p>
-            </div>
-          );
-        })}
+                <span
+                  className={`mt-2 text-[11px] font-medium sm:text-xs md:text-sm ${
+                    isActive ? "text-cyan-400" : "text-gray-200"
+                  }`}
+                >
+                  {skill.name}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
 
       {/* ── Description ── */}
       {activeSkill && (
