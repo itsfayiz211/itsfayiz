@@ -100,7 +100,7 @@ export default function Projects() {
           {currentProjects.map((project, index) => (
             <ScrollStackItem
               key={project.title}
-              itemClassName="overflow-hidden rounded-[28px] border border-white/10 bg-neutral-950"
+              itemClassName="overflow-hidden rounded-[28px] border border-white/10 bg-neutral-950 p-0"
             >
               <article
                 data-aos="fade-up"
@@ -110,14 +110,13 @@ export default function Projects() {
                 <Image
                   src={project.image}
                   alt={project.title}
-                  width={500}
-                  height={420}
+                 
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />
 
                 <div className="absolute inset-0 bg-linear-to-t from-black via-black/85 to-black/20" />
 
-                <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-5 text-left md:p-6">
+                <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-4 text-left md:p-5">
                   <p className="text-[11px] uppercase tracking-[0.35em] text-cyan-200/90">Featured project</p>
                   <h3 className="mt-2 text-2xl font-semibold text-white md:text-3xl">{project.title}</h3>
                   <p className="mt-3 max-w-md text-sm text-gray-200 md:text-[15px]">{project.description}</p>
