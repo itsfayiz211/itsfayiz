@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/Fayiz.png",
+        url: "/images/FayizP.jpeg",
         width: 1200,
         height: 1200,
         alt: "Fayis K — Best Full Stack Developer in Calicut and Kozhikode",
@@ -70,12 +70,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
     description:
-      "SEO-focused Next.js and MERN web development portfolio by Fayis K in Calicut and Kozhikode.",
-    images: ["/images/Fayiz.png"],
+      "Portfolio of Fayis K, a full stack developer building modern Next.js and MERN websites for businesses in Calicut and Kozhikode.",
+    images: ["/images/FayizP.jpeg"],
     creator: "@itsfayiz_",
   },
   verification: {
-    google: "-ZKbB1cwla0jQAlFgqBc3otb4pWn09XViLJppCKtj9U",
+    google: "DB5Gh4M12iv__kVlCpYUfuik3agpyIypBUYKR_gWGfw",
   },
   icons: {
     icon: "/images/Fayiz.png",
@@ -102,7 +102,7 @@ export default function RootLayout({
               alternateName: "itsfayiz",
               url: "https://itsfayiz.vercel.app/",
               jobTitle: "Best Full Stack Developer in Kozhikode (Calicut)",
-              image: "https://itsfayiz.vercel.app/images/Fayiz.png",
+              image: "https://itsfayiz.vercel.app/images/FayizP.jpeg",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Kozhikode",
