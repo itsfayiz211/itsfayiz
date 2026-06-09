@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
-import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 
 // Import your images
 import portfolioImage from "@/public/assets/portfolio.png";
@@ -74,7 +73,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="bg-black text-white py-16 px-6 md:px-20 lg:px-32 min-h-[140vh]"
+      className="bg-black text-white py-16 px-6 md:px-20 lg:px-32 min-h-screen"
     >
       {/* Heading */}
       <div  className="text-center mb-12">
@@ -87,38 +86,28 @@ export default function Projects() {
       </div>
 
       <div className="mx-auto max-w-6xl">
-        <ScrollStack
-          className="w-full"
-          itemDistance={70}
-          itemScale={0.035}
-          itemStackDistance={35}
-          baseScale={0.88}
-          stackPosition="18%"
-          scaleEndPosition="10%"
-          useWindowScroll={true}
-        >
-          {currentProjects.map((project, index) => (
-            <ScrollStackItem
-              key={project.title}
-              itemClassName="overflow-hidden rounded-[28px] border border-white/10 bg-neutral-950 p-0"
-            >
+        <div className="overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" style={{ msOverflowStyle: "none" }}>
+          <div className="flex min-w-max gap-6 md:gap-8">
+            {currentProjects.map((project, index) => (
               <article
+                key={project.title}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                className="group relative h-88 w-full overflow-hidden rounded-[28px] bg-neutral-950 sm:h-96"
+                className="group relative h-104 w-72 shrink-0 overflow-hidden rounded-[28px] bg-neutral-950 shadow-[0_18px_35px_rgba(0,0,0,0.35)] sm:w-80 md:w-96 lg:w-104"
               >
                 <Image
                   src={project.image}
                   alt={project.title}
-                 
+                  width={500}
+                  height={420}
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-linear-to-t from-black via-black/85 to-black/20" />
+                <div className="absolute inset-0 bg-black/70" />
 
                 <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-4 text-left md:p-5">
                   <p className="text-[11px] uppercase tracking-[0.35em] text-cyan-200/90">Featured project</p>
-                  <h3 className="mt-2 text-2xl font-semibold text-white md:text-3xl">{project.title}</h3>
+                  <h3 className="mt-2 text-xl font-semibold text-white md:text-2xl">{project.title}</h3>
                   <p className="mt-3 max-w-md text-sm text-gray-200 md:text-[15px]">{project.description}</p>
 
                   <div className="mt-5 flex flex-wrap gap-3">
@@ -141,9 +130,9 @@ export default function Projects() {
                   </div>
                 </div>
               </article>
-            </ScrollStackItem>
-          ))}
-        </ScrollStack>
+            ))}
+          </div>
+        </div>
       </div>
 
     </section>
