@@ -73,16 +73,13 @@ export default function HomeClient() {
             <div className="max-w-2xl">
               <span className="inline-flex items-center gap-2 rounded-full border border-stone-300/25 bg-stone-100/10 px-4 py-2 text-xs uppercase tracking-[0.35em] text-stone-100 shadow-[0_18px_35px_rgba(0,0,0,0.25)] backdrop-blur-md">
                 <Sparkles className="h-3.5 w-3.5" />
-                SEO-ready full stack developer
+                The best full stack developer
               </span>
-              <h1 className="mt-4 text-5xl font-semibold leading-tight text-white sm:text-6xl lg:text-7xl">
+              <h1 className="mt-4 text-5xl font-semibold leading-tight text-white sm:text-6xl lg:text-[4.5rem]">
                 Fayis K
               </h1>
-              <p className="mt-3 text-base text-stone-100/95 sm:text-lg md:text-xl">
+              <p className="mt-3 max-w-xl text-lg text-stone-100/95 sm:text-xl md:text-2xl">
                 Best Full Stack Developer in Calicut and Kozhikode — building fast, conversion-focused websites with Next.js, MERN, and clean SEO foundations.
-              </p>
-              <p className="mt-4 max-w-xl text-sm text-stone-200/90 sm:text-base">
-                I craft responsive landing pages, business sites, and scalable web apps that help brands rank better and convert more visitors.
               </p>
 
               <div className="mt-5 flex flex-wrap items-center gap-3">
