@@ -47,7 +47,7 @@ function TypingIndicator() {
       {[0, 1, 2].map((i) => (
         <div
           key={i}
-          className="w-2 h-2 rounded-full bg-blue-400"
+          className="w-2 h-2 rounded-full bg-violet-400"
           style={{
             animation: 'typing 1s ease-in-out infinite',
             animationDelay: `${i * 0.2}s`,
@@ -166,7 +166,7 @@ const cardBg = isLight ? 'bg-white border-gray-200' : 'bg-neutral-950 border-whi
         className={`fixed  bottom-6 right-6  z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 ${
           isOpen
             ? 'bg-gray-700 scale-95'
-            : 'bg-gradient-to-br from-cyan-500 to-cyan-600 hover:scale-110'
+            : 'bg-gradient-to-br from-violet-500 to-fuchsia-500 hover:scale-110'
         }`}
         style={!isOpen ? { animation: 'pulse-glow 2s ease-in-out infinite' } : {}}
         aria-label="Open AI Chat"
@@ -206,7 +206,7 @@ const cardBg = isLight ? 'bg-white border-gray-200' : 'bg-neutral-950 border-whi
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-300 animate-pulse" />
-                <p className="text-[11px] text-blue-100">Online · Instant replies</p>
+                <p className="text-[11px] text-violet-100">Online · Instant replies</p>
               </div>
             </div>
           </div>
@@ -235,7 +235,7 @@ const cardBg = isLight ? 'bg-white border-gray-200' : 'bg-neutral-950 border-whi
               <div
                 className={`w-7 h-7 rounded-xl shrink-0 flex items-center justify-center ${
                   msg.role === 'user'
-                    ? 'bg-blue-500'
+                    ? 'bg-violet-500'
                     : isLight
                     ? 'bg-gray-100'
                     : 'bg-white/10'
@@ -275,7 +275,7 @@ const cardBg = isLight ? 'bg-white border-gray-200' : 'bg-neutral-950 border-whi
                   isLight ? 'bg-gray-100' : 'bg-white/10'
                 }`}
               >
-                <Bot size={13} className={isLight ? 'text-blue-500' : 'text-blue-400'} />
+                <Bot size={13} className={isLight ? 'text-violet-500' : 'text-violet-400'} />
               </div>
               <div
                 className={`px-4 py-3 rounded-2xl rounded-tl-sm ${
@@ -295,7 +295,7 @@ const cardBg = isLight ? 'bg-white border-gray-200' : 'bg-neutral-950 border-whi
               <button
                 key={s}
                 onClick={() => sendMessage(s)}
-                className={`text-xs px-3 py-1.5 rounded-xl border transition-all hover:border-blue-400/50 hover:text-blue-400 ${
+                className={`text-xs px-3 py-1.5 rounded-xl border transition-all hover:border-violet-400/50 hover:text-violet-400 ${
                   isLight
                     ? 'bg-gray-50 border-gray-200 text-gray-600'
                     : 'bg-white/5 border-white/10 text-gray-400'
@@ -324,15 +324,15 @@ const cardBg = isLight ? 'bg-white border-gray-200' : 'bg-neutral-950 border-whi
             disabled={isTyping}
             className={`flex-1 px-4 py-2.5 rounded-xl text-sm outline-none border transition-all ${
               isLight
-                ? 'bg-white border-gray-200 text-gray-800 placeholder:text-gray-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-100'
-                : 'bg-white/8 border-white/10 text-gray-200 placeholder:text-gray-600 focus:border-blue-500/50'
+                ? 'bg-white border-gray-200 text-gray-800 placeholder:text-gray-400 focus:border-violet-400 focus:ring-2 focus:ring-violet-100'
+                : 'bg-white/8 border-white/10 text-gray-200 placeholder:text-gray-600 focus:border-violet-500/50'
             }`}
           />
           <button
             id="chatbot-send"
             type="submit"
             disabled={!input.trim() || isTyping}
-            className="w-10 h-10 rounded-xl bg-blue-500 hover:bg-blue-600 disabled:opacity-40 text-white flex items-center justify-center transition-all shrink-0"
+            className="w-10 h-10 rounded-xl bg-violet-500 hover:bg-violet-600 disabled:opacity-40 text-white flex items-center justify-center transition-all shrink-0"
             aria-label="Send message"
           >
             <Send size={15} />

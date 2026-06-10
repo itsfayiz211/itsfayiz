@@ -82,7 +82,7 @@ export default function Contact() {
                 href="https://linkedin.com/in/fayis-k-1641122b6"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-blue-500 transition"
+                className="hover:text-violet-400 transition"
               >
                 <FaLinkedin />
               </a>
@@ -91,7 +91,7 @@ export default function Contact() {
                 href="https://instagram.com/itsfayiz_"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-pink-500 transition"
+                className="hover:text-fuchsia-400 transition"
               >
                 <FaInstagram />
               </a>
@@ -100,7 +100,7 @@ export default function Contact() {
                 href="https://github.com/fayispachu"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-gray-400 transition"
+                className="hover:text-violet-200 transition"
               >
                 <FaGithub />
               </a>
@@ -109,7 +109,7 @@ export default function Contact() {
                 href="https://discord.gg/yourinvite"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-indigo-400 transition"
+                className="hover:text-violet-300 transition"
               >
                 <FaDiscord />
               </a>
@@ -133,7 +133,7 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 placeholder="Your Name"
-                className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
             </div>
 
@@ -146,7 +146,7 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 placeholder="Your Email"
-                className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
             </div>
 
@@ -161,13 +161,13 @@ export default function Contact() {
                 required
                 rows={4}
                 placeholder="Your Message"
-                className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-white hover:bg-black text-neutral-800 hover:text-white transition p-3 rounded-lg font-semibold"
+                className="w-full bg-white hover:bg-violet-600 text-neutral-800 hover:text-white transition p-3 rounded-lg font-semibold"
             >
               Send Message
             </button>
@@ -201,7 +201,7 @@ export default function Contact() {
 
             <button
               onClick={() => setShowSuccess(false)}
-              className="mt-6 px-6 py-2 bg-white text-black rounded-lg hover:bg-neutral-200 transition"
+              className="mt-6 px-6 py-2 bg-white text-black rounded-lg hover:bg-violet-600 hover:text-white transition"
             >
               Close
             </button>

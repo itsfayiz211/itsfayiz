@@ -55,18 +55,18 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.66 0.18 290);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.18 0.04 290);
+  --accent-foreground: oklch(0.98 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: oklch(0.66 0.18 290);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -108,12 +108,12 @@
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary: oklch(0.66 0.18 290);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: oklch(0.66 0.18 290);
 }
 
 @layer base {
@@ -129,15 +129,16 @@
   body {
     @apply bg-background text-foreground antialiased;
     background:
-      radial-gradient(circle at top, rgba(14, 165, 233, 0.08), transparent 28%),
-      linear-gradient(180deg, #020617 0%, #020617 35%, #0f172a 100%);
+      radial-gradient(circle at top, rgba(192, 132, 252, 0.14), transparent 30%),
+      radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.10), transparent 24%),
+      linear-gradient(180deg, #020617 0%, #111827 35%, #1f2937 100%);
     min-height: 100vh;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background: rgba(56, 189, 248, 0.25);
-    color: #eff6ff;
+    background: rgba(192, 132, 252, 0.28);
+    color: #fff;
   }
 }
 

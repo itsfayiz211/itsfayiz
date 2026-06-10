@@ -65,12 +65,12 @@ export default function Skills() {
                 type="button"
                 key={`${skill.id}-${index}`}
                 onClick={() => setActiveSkill(skill.name)}
-                className="flex w-24 shrink-0 flex-col items-center rounded-2xl border border-white/10 bg-black/60 px-3 py-3 text-center transition duration-200 hover:-translate-y-0.5 hover:border-cyan-400/60 hover:bg-black/80 sm:w-28 md:w-32"
+                className="flex w-24 shrink-0 flex-col items-center rounded-2xl border border-white/10 bg-black/60 px-3 py-3 text-center transition duration-200 hover:-translate-y-0.5 hover:border-violet-400/60 hover:bg-black/80 sm:w-28 md:w-32"
               >
                 <div
                   className={`relative h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 sm:h-16 sm:w-16 md:h-18 md:w-18 ${skill.bgClass || ""} ${
                     isActive
-                      ? "ring-2 ring-cyan-400 shadow-[0_0_20px_#06b6d4]"
+                      ? "ring-2 ring-violet-400 shadow-[0_0_20px_rgba(192,132,252,0.55)]"
                       : "shadow-lg hover:shadow-xl"
                   }`}
                 >
@@ -85,7 +85,7 @@ export default function Skills() {
 
                 <span
                   className={`mt-2 text-[11px] font-medium sm:text-xs md:text-sm ${
-                    isActive ? "text-cyan-400" : "text-gray-200"
+                    isActive ? "text-violet-400" : "text-gray-200"
                   }`}
                 >
                   {skill.name}
@@ -106,7 +106,7 @@ export default function Skills() {
       {/* ── Description ── */}
       {activeSkill && (
         <div className="mt-8 md:mt-10 max-w-xl text-center px-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-violet-400 mb-2">
             {activeSkill}
           </h2>
 

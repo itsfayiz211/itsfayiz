@@ -38,7 +38,7 @@ export default function Process() {
       {/* TITLE */}
       <div className="text-center mb-16 md:mb-20">
         <h2 className="text-3xl sm:text-4xl font-bold">
-          My <span className="text-cyan-400">Process</span>
+          My <span className="text-violet-400">Process</span>
         </h2>
         <p className="text-gray-400 mt-4 max-w-xl mx-auto text-sm sm:text-base">
           From idea to production with a structured workflow.
@@ -55,7 +55,7 @@ export default function Process() {
           initial={{ height: 0 }}
           whileInView={{ height: "100%" }}
           transition={{ duration: 1.4 }}
-          className="absolute left-1/2 top-0 -translate-x-1/2 w-[2px] bg-cyan-400"
+          className="absolute left-1/2 top-0 -translate-x-1/2 w-[2px] bg-violet-400"
         />
 
         {/* STEPS */}
@@ -83,8 +83,8 @@ export default function Process() {
                     p-4 sm:p-6
                     rounded-xl
                     transition-all duration-300
-                    hover:border-cyan-400/50
-                    hover:shadow-[0_0_30px_rgba(6,182,212,0.25)]
+                    hover:border-violet-400/50
+                    hover:shadow-[0_0_30px_rgba(139,92,246,0.25)]
                   "
                   >
                     <h3 className="text-base sm:text-lg font-semibold">
@@ -106,11 +106,11 @@ export default function Process() {
                     bg-gray-900 border border-gray-700
                     flex items-center justify-center
                     transition-all duration-300
-                    shadow-md shadow-cyan-500/10
-                    hover:shadow-cyan-400/40
+                    shadow-md shadow-violet-500/10
+                    hover:shadow-violet-400/40
                   "
                   >
-                    <div className="text-cyan-400">
+                    <div className="text-violet-400">
                       {step.icon}
                     </div>
                   </div>

@@ -93,7 +93,7 @@ export default function Projects() {
                 key={project.title}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                className="group relative h-104 w-72 shrink-0 overflow-hidden rounded-[28px] bg-neutral-950 shadow-[0_18px_35px_rgba(0,0,0,0.35)] sm:w-80 md:w-96 lg:w-104"
+                className="group relative h-104 border-2 border-fuchsia-400 w-72 shrink-0 overflow-hidden rounded-[28px] bg-neutral-950 shadow-[0_18px_35px_rgba(0,0,0,0.35)] sm:w-80 md:w-96 lg:w-104"
               >
                 <Image
                   src={project.image}
@@ -106,7 +106,7 @@ export default function Projects() {
                 <div className="absolute inset-0 bg-black/70" />
 
                 <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-4 text-left md:p-5">
-                  <p className="text-[11px] uppercase tracking-[0.35em] text-cyan-200/90">Featured project</p>
+                  <p className="text-[11px] uppercase tracking-[0.35em] text-violet-100/95">Featured project</p>
                   <h3 className="mt-2 text-xl font-semibold text-white md:text-2xl">{project.title}</h3>
                   <p className="mt-3 max-w-md text-sm text-gray-200 md:text-[15px]">{project.description}</p>
 
@@ -115,7 +115,7 @@ export default function Projects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-full bg-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-600"
+                      className="rounded-full bg-violet-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-500/30 transition hover:bg-violet-600"
                     >
                       GitHub
                     </a>
@@ -123,7 +123,7 @@ export default function Projects() {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-600"
+                      className="rounded-full bg-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/30 transition hover:bg-fuchsia-600"
                     >
                       Live Demo
                     </a>
