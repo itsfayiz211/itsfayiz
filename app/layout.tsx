@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
   keywords: [
     "best full stack developer in Calicut",
-    "best full stack developer in Kozhikode",
+    "itsfayiz developer",
     "full stack developer Calicut",
     "full stack developer Kozhikode",
     "Next.js developer Calicut",

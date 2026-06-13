@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 const skills = [
@@ -38,7 +39,6 @@ const skillDescriptions: Record<string, string> = {
 
 export default function Skills() {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
-  const marqueeSkills = [...skills, ...skills];
 
   return (
     <section
@@ -49,71 +49,71 @@ export default function Skills() {
         Skills
       </h1>
 
-      {/* ── Skills Marquee ── */}
-      <div className="w-full max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4 shadow-[0_18px_35px_rgba(0,0,0,0.25)] backdrop-blur-md">
-        <div
-          className="flex w-max gap-4 md:gap-6"
-          style={{ animation: "marquee 24s linear infinite" }}
-          onMouseEnter={(e) => (e.currentTarget.style.animationPlayState = "paused")}
-          onMouseLeave={(e) => (e.currentTarget.style.animationPlayState = "running")}
-        >
-          {marqueeSkills.map((skill, index) => {
-            const isActive = activeSkill === skill.name;
+      {/* ── Skills Grid ── */}
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-5 md:gap-8 w-full max-w-5xl">
+        {skills.map((skill) => {
+          const isActive = activeSkill === skill.name;
 
-            return (
-              <button
-                type="button"
-                key={`${skill.id}-${index}`}
-                onClick={() => setActiveSkill(skill.name)}
-                className="flex w-24 shrink-0 flex-col items-center rounded-2xl border border-white/10 bg-black/60 px-3 py-3 text-center transition duration-200 hover:-translate-y-0.5 hover:border-violet-400/60 hover:bg-black/80 sm:w-28 md:w-32"
+          return (
+            <motion.div
+              key={skill.id}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveSkill(skill.name)}
+              className="flex flex-col items-center cursor-pointer"
+            >
+              <div
+                className={`
+                  relative
+                  w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24
+                  rounded-xl overflow-hidden
+                  flex items-center justify-center
+                  transition-all duration-300
+                  ${skill.bgClass || ""}
+                  ${isActive
+                    ? "ring-2 ring-cyan-400 shadow-[0_0_20px_#06b6d4]"
+                    : "shadow-lg hover:shadow-xl"}
+                `}
               >
-                <div
-                  className={`relative h-14 w-14 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 sm:h-16 sm:w-16 md:h-18 md:w-18 ${skill.bgClass || ""} ${
-                    isActive
-                      ? "ring-2 ring-violet-400 shadow-[0_0_20px_rgba(192,132,252,0.55)]"
-                      : "shadow-lg hover:shadow-xl"
-                  }`}
-                >
-                  <Image
-                    src={skill.icon}
-                    alt={skill.name}
-                    fill
-                    sizes="56px"
-                    className="object-contain p-2"
-                  />
-                </div>
+                <Image
+                  src={skill.icon}
+                  alt={skill.name}
+                  fill
+                  sizes="(max-width: 640px) 64px,
+                         (max-width: 768px) 80px,
+                         (max-width: 1024px) 96px,
+                         96px"
+                  className="object-contain p-2"
+                />
+              </div>
 
-                <span
-                  className={`mt-2 text-[11px] font-medium sm:text-xs md:text-sm ${
-                    isActive ? "text-violet-400" : "text-gray-200"
-                  }`}
-                >
-                  {skill.name}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+              <p
+                className={`mt-2 text-xs sm:text-sm md:text-base transition ${
+                  isActive ? "text-cyan-400" : "text-gray-300"
+                }`}
+              >
+                {skill.name}
+              </p>
+            </motion.div>
+          );
+        })}
       </div>
-
-      <style jsx global>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
 
       {/* ── Description ── */}
       {activeSkill && (
-        <div className="mt-8 md:mt-10 max-w-xl text-center px-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-violet-400 mb-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-8 md:mt-10 max-w-xl text-center px-4"
+        >
+          <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-2">
             {activeSkill}
           </h2>
 
           <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
             {skillDescriptions[activeSkill]}
           </p>
-        </div>
+        </motion.div>
       )}
     </section>
   );
