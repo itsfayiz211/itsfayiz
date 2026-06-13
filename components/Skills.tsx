@@ -20,7 +20,7 @@ const skills = [
     { id: 13, name: "Capcut", icon: "/assets/capcutImage.png" },
 
 ];
-
+// a
 const skillDescriptions: Record<string, string> = {
   HTML: "Strong semantic markup and SEO-friendly structure.",
   CSS: "Responsive layouts with Flexbox, Grid, and animations.",
