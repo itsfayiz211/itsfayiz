@@ -52,11 +52,12 @@ export default function HomeClient() {
         <div className="absolute inset-0">
           <Image
             src={fayizPhoto}
-            alt="Fayis K — Best Full Stack Developer in Calicut and Kozhikode"
-            fill
+            alt="Fayis K — Best Full  Stack Developer in Calicut and Kozhikode"
+            
             priority
             sizes="(min-width: 768px) 100vw, 100vw"
-            className="hidden object-cover object-center opacity-30 md:block"
+            className="hidden object-cover object-center
+             opacity-30 md:block"
           />
           <Image
             src={fayizMobile}
@@ -64,7 +65,7 @@ export default function HomeClient() {
             fill
             priority
             sizes="100vw"
-            className="block object-cover object-center opacity-45 md:hidden"
+            className="block object-cover object-center  opacity-45 md:hidden"
           />
         </div>
 
