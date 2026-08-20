@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
@@ -64,11 +64,16 @@ const projects = [
 ];
 
 export default function Projects() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 3;
+
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, easing: "ease-in-out" });
   }, []);
 
-  const currentProjects = projects;
+  const totalPages = Math.ceil(projects.length / cardsPerPage);
+  const startIndex = (currentPage - 1) * cardsPerPage;
+  const currentProjects = projects.slice(startIndex, startIndex + cardsPerPage);
 
   return (
     <section
@@ -85,56 +90,76 @@ export default function Projects() {
         </p>
       </div>
 
-      <div className="mx-auto max-w-6xl">
-        <div className="overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" style={{ msOverflowStyle: "none" }}>
-          <div className="flex min-w-max gap-6 md:gap-8">
-            {currentProjects.map((project, index) => (
-              <article
-                key={project.title}
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-                className="group relative h-104 border-2 border-fuchsia-400 w-72 shrink-0 overflow-hidden rounded-[28px] bg-neutral-950 shadow-[0_18px_35px_rgba(0,0,0,0.35)] sm:w-80 md:w-96 lg:w-104"
-              >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={500}
-                  height={420}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                />
+      {/* Projects Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {currentProjects.map((project, index) => (
+          <div
+            key={index}
+            data-aos="fade-up"
+            data-aos-delay={index * 150}
+            className="relative bg-neutral-950 rounded-xl overflow-hidden shadow-lg"
+          >
+            {/* Image */}
+            <Image
+              src={project.image}
+              alt={project.title}
+              // data-aos="fade-up"
+              width={400}
+              height={250}
+              className="w-full h-56 object-cover"
+            />
 
-                <div className="absolute inset-0 bg-black/70" />
+            {/* Always-visible overlay */}
+            <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center p-4">
+              <h3 className="text-xl font-bold mb-2">
+                {project.title}
+              </h3>
+              <p className="text-sm text-gray-300 mb-4">
+                {project.description}
+              </p>
 
-                <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-4 text-left md:p-5">
-                  <p className="text-[11px] uppercase tracking-[0.35em] text-violet-100/95">Featured project</p>
-                  <h3 className="mt-2 text-xl font-semibold text-white md:text-2xl">{project.title}</h3>
-                  <p className="mt-3 max-w-md text-sm text-gray-200 md:text-[15px]">{project.description}</p>
+              <div className="flex gap-4">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                                  className="px-4 py-2 border border-violet-400/30 bg-violet-500/10  backdrop-blur-md hover:border-violet-300/70 hover:bg-violet-500/15 inline-flex text-white rounded-md text-sm shadow-lg shadow-emerald-500/30 transition"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+  className="px-4 py-2 inline-flex items-center rounded-md bg-linear-to-r from-violet-500 to-fuchsia-500  text-sm font-semibold text-white shadow-[0_18px_35px_rgba(139,92,246,0.35)]   hover:from-violet-600 hover:to-fuchsia-600"
 
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full bg-violet-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-500/30 transition hover:bg-violet-600"
-                    >
-                      GitHub
-                    </a>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full bg-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/30 transition hover:bg-fuchsia-600"
-                    >
-                      Live Demo
-                    </a>
-                  </div>
-                </div>
-              </article>
-            ))}
+>
+                  Live Demo
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
 
+      {/* Pagination */}
+      <div className="flex justify-center mt-10 gap-2">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index + 1)}
+            // data-aos="zoom-in"
+            // data-aos-delay={index * 100}
+            className={`px-4 py-2 rounded-md text-sm font-medium border ${
+              currentPage === index + 1
+                ? "bg-white text-black border-neutral-500"
+                : "bg-black text-white border-gray-300 hover:bg-neutral-900"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </section>
   );
 }

@@ -167,7 +167,7 @@ export default function Contact() {
 
             <button
               type="submit"
-                className="w-full bg-white hover:bg-violet-600 text-neutral-800 hover:text-white transition p-3 rounded-lg font-semibold"
+                className="w-full hover:bg-white bg-violet-600 hover:text-neutral-800 text-white transition p-3 rounded-lg font-semibold"
             >
               Send Message
             </button>

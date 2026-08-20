@@ -52,11 +52,12 @@ export default function HomeClient() {
         <div className="absolute inset-0">
           <Image
             src={fayizPhoto}
-            alt="Fayis K — Best Full Stack Developer in Calicut and Kozhikode"
-            fill
+            alt="Fayis K — Best Full  Stack Developer in Calicut and Kozhikode"
+            
             priority
             sizes="(min-width: 768px) 100vw, 100vw"
-            className="hidden object-cover object-center opacity-30 md:block"
+            className="hidden object-cover object-center
+             opacity-30 md:block"
           />
           <Image
             src={fayizMobile}
@@ -64,7 +65,7 @@ export default function HomeClient() {
             fill
             priority
             sizes="100vw"
-            className="block object-cover object-center opacity-45 md:hidden"
+            className="block object-cover object-center  opacity-45 md:hidden"
           />
         </div>
 
@@ -85,7 +86,7 @@ export default function HomeClient() {
               <div className="mt-5 flex flex-wrap items-center gap-3">
                 <a
                   href="#projects"
-                  className="inline-flex items-center rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_rgba(139,92,246,0.35)] transition-transform duration-200 hover:-translate-y-0.5 hover:from-violet-600 hover:to-fuchsia-600"
+                  className="inline-flex items-center rounded-full bg-linear-to-r from-violet-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_rgba(139,92,246,0.35)] transition-transform duration-200 hover:-translate-y-0.5 hover:from-violet-600 hover:to-fuchsia-600"
                 >
                   View projects
                 </a>
@@ -93,7 +94,7 @@ export default function HomeClient() {
                   href="#contact"
                   className="inline-flex items-center rounded-full border border-violet-400/30 bg-violet-500/10 px-5 py-3 text-sm font-semibold text-stone-100 backdrop-blur-md transition hover:border-violet-300/70 hover:bg-violet-500/15"
                 >
-                  Let&apos;s build your site
+                  Let&apos;s connect
                 </a>
               </div>
 
