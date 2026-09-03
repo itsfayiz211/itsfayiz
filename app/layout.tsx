@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://itsfayiz.vercel.app"),
+  metadataBase: new URL("https://faaaayize.vercel.app"),
   title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
   description:
     "Fayis K (itsfayiz) is a top full stack developer in Calicut and Kozhikode, creating SEO-ready Next.js and MERN websites with clean design and fast performance.",
@@ -24,20 +24,20 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
   keywords: [
     "best full stack developer in Calicut",
-    "itsfayiz developer",
+    "faaaayize Developer",
     "full stack developer Calicut",
     "full stack developer Kozhikode",
     "Next.js developer Calicut",
     "MERN stack developer Kozhikode",
     "SEO web developer Calicut",
     "SEO website designer Kozhikode",
-    "itsfayiz",
+    "faaaayize",
     "Fayis K",
   ],
-  authors: [{ name: "Fayis K", url: "https://itsfayiz.vercel.app" }],
+  authors: [{ name: "Fayis K", url: "https://faaaayize.vercel.app" }],
   creator: "Fayis K",
   alternates: {
-    canonical: "https://itsfayiz.vercel.app/",
+    canonical: "https://faaaayize.vercel.app/",
   },
   robots: {
     index: true,
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
     description:
       "Portfolio and services of Fayis K, a full stack developer focused on Next.js, MERN, SEO, and modern web experiences in Calicut and Kozhikode.",
-    url: "https://itsfayiz.vercel.app",
+    url: "https://faaaayize.vercel.app",
     siteName: "Fayis K",
     type: "website",
     locale: "en_US",
@@ -79,9 +79,9 @@ export const metadata: Metadata = {
     google: "DB5Gh4M12iv__kVlCpYUfuik3agpyIypBUYKR_gWGfw",
   },
   icons: {
-    icon: "/images/Fayiz.png",
-    shortcut: "/images/Fayiz.png",
-    apple: "/images/Fayiz.png",
+    icon: "/images/FayizP.png",
+    shortcut: "/images/FayizP.png",
+    apple: "/images/FayizP.png",
   },
 };
 
@@ -113,9 +113,9 @@ export default function RootLayout({
               "@type": "Person",
               name: "Fayis K",
               alternateName: "itsfayiz",
-              url: "https://itsfayiz.vercel.app/",
+              url: "https://faaaayize.vercel.app",
               jobTitle: "Best Full Stack Developer in Kozhikode (Calicut)",
-              image: "https://itsfayiz.vercel.app/images/FayizP.jpeg",
+              image: "https://faaaayize.vercel.app/images/FayizP.jpeg",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Kozhikode",
