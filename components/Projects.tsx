@@ -12,15 +12,26 @@ import tradingJournalImage from "@/public/assets/crypto.png";
 import cateringImage from "@/public/assets/catering.png";
 import chatAppImage from "@/public/assets/chatAppImage.png";
 import WeddingInvitationImage from "@/public/assets/weddingCard.png";
+import Bee from "@/public/assets/bee.png";
 const projects = [
-  {
+
+
+     {
     title: "Trading Journal App",
     description:
       "A web application for tracking trading activities and analyzing performance.",
     image: tradingJournalImage,
     github: "https://github.com/fayispachu/TradingJournal",
     demo: "https://yourprimejournal.vercel.app/",
+  },{
+    title: "Travel Agency Website",
+    description:
+      "A responsive website for a travel agency, showcasing destinations and booking services.",
+    image: tradingJournalImage,
+    github: "https://github.com/fayispachu/Trihikers",
+    demo: "  https://trihikers.vercel.app/",
   },
+
    {
     title: "Catering Service Website",
     description:
@@ -50,7 +61,7 @@ const projects = [
     description: "A smart invitation platform where guests scan a QR code to access a personalized event page, RSVP instantly, and interact with event features.",
     image: WeddingInvitationImage,
     github: "#",
-    demo: "https://teambcz.netlify.app/",
+    demo: "https://invitationcard-one.vercel.app/",
   },
   {
     title: "Project Management App",
@@ -59,6 +70,14 @@ const projects = [
     image: projectManagementImage,
     github: "https://github.com/fayispachu/Project-Management-App-New",
     demo: "https://project-management-app-new-pshf.onrender.com/",
+  },
+   {
+    title: "Perfect Honey",
+    description:
+      "A responsive website for a honey brand, showcasing products and providing an online store experience.",
+    image: Bee,
+    github: "https://github.com/fayispachu/Perfecthoney",
+    demo: "https://perfecthoney.vercel.app/",
   },
  
 ];
