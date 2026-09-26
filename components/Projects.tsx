@@ -13,6 +13,7 @@ import cateringImage from "@/public/assets/catering.png";
 import chatAppImage from "@/public/assets/chatAppImage.png";
 import WeddingInvitationImage from "@/public/assets/weddingCard.png";
 import Bee from "@/public/assets/bee.png";
+import tri from "@/public/assets/tri.png";
 const projects = [
 
 
@@ -27,7 +28,7 @@ const projects = [
     title: "Travel Agency Website",
     description:
       "A responsive website for a travel agency, showcasing destinations and booking services.",
-    image: tradingJournalImage,
+    image: tri,
     github: "https://github.com/fayispachu/Trihikers",
     demo: "  https://trihikers.vercel.app/",
   },
