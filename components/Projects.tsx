@@ -19,7 +19,7 @@ const projects = [
       "A web application for tracking trading activities and analyzing performance.",
     image: tradingJournalImage,
     github: "https://github.com/fayispachu/TradingJournal",
-    demo: "https://bcz-tradingjournal.onrender.com/",
+    demo: "https://yourprimejournal.vercel.app/",
   },
    {
     title: "Catering Service Website",
