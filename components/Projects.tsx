@@ -8,7 +8,7 @@ import Image from "next/image";
 // Import your images
 import portfolioImage from "@/public/assets/portfolio.png";
 import projectManagementImage from "@/public/assets/projectmanagement.png";
-import tradingJournalImage from "@/public/assets/crypto.png";
+import tradingJournalImage from "@/public/assets/primejournal.png";
 import cateringImage from "@/public/assets/catering.png";
 import chatAppImage from "@/public/assets/chatAppImage.png";
 import WeddingInvitationImage from "@/public/assets/weddingCard.png";
