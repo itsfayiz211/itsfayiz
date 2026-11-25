@@ -13,6 +13,7 @@ const Contact = dynamic(() => import("./Contact"));
 import { FaLinkedin, FaInstagram, FaGithub, FaDiscord } from "react-icons/fa";
 import Chatbot from "./Chatbot";
 import { ArrowDown, Sparkles } from "lucide-react";
+import Trading from "./Trading";
 import fayizPhoto from "@/public/images/Fayiz.png";
 import fayizMobile from "@/public/images/FayizSM.jpeg";
 
@@ -72,34 +73,34 @@ export default function HomeClient() {
         <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-4 pb-16 pt-28 text-stone-100 sm:px-6 lg:px-8">
           <div className="grid items-center gap-4 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="max-w-2xl">
-              <span className="inline-flex items-center gap-2 rounded-full border border-stone-300/25 bg-stone-100/10 px-4 py-2 text-xs uppercase tracking-[0.35em] text-stone-100 shadow-[0_18px_35px_rgba(0,0,0,0.25)] backdrop-blur-md">
+              <span className="inline-flex items-center gap-2 rounded-full border border-sky-300/20 bg-stone-100/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-stone-100 shadow-[0_18px_35px_rgba(0,0,0,0.25)] backdrop-blur-md">
                 <Sparkles className="h-3.5 w-3.5" />
-                The best full stack developer
+                Full-Stack Developer · Crypto &amp; Forex Trader
               </span>
-              <h1 className="mt-4 text-5xl font-semibold leading-tight text-white sm:text-6xl lg:text-[4.5rem]">
+              <h1 className="mt-4 text-5xl font-semibold leading-tight tracking-tight text-white sm:text-6xl lg:text-[4.5rem]">
                 Fayis K
               </h1>
-              <p className="mt-3 max-w-xl text-lg text-stone-100/95 sm:text-xl md:text-2xl">
-                Best Full Stack Developer in Calicut and Kozhikode — building fast, conversion-focused websites with Next.js, MERN, and clean SEO foundations.
+              <p className="mt-3 max-w-xl text-lg leading-relaxed text-stone-100/95 sm:text-xl md:text-2xl">
+                I build full-stack products and have spent around two years exploring crypto and forex markets — a journey across technology, market structure, and risk management.
               </p>
 
               <div className="mt-5 flex flex-wrap items-center gap-3">
                 <a
                   href="#projects"
-                  className="inline-flex items-center rounded-full bg-linear-to-r from-violet-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_rgba(139,92,246,0.35)] transition-transform duration-200 hover:-translate-y-0.5 hover:from-violet-600 hover:to-fuchsia-600"
+                  className="inline-flex items-center rounded-full bg-linear-to-r from-sky-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_rgba(14,165,233,0.25)] transition-transform duration-200 hover:-translate-y-0.5 hover:from-sky-600 hover:to-blue-700"
                 >
                   View projects
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center rounded-full border border-violet-400/30 bg-violet-500/10 px-5 py-3 text-sm font-semibold text-stone-100 backdrop-blur-md transition hover:border-violet-300/70 hover:bg-violet-500/15"
+                  className="inline-flex items-center rounded-full border border-sky-300/30 bg-sky-500/10 px-5 py-3 text-sm font-semibold text-stone-100 backdrop-blur-md transition hover:border-sky-300/70 hover:bg-sky-500/15"
                 >
                   Let&apos;s connect
                 </a>
               </div>
 
               <div className="mt-5 flex flex-wrap gap-3 text-xs uppercase tracking-[0.35em] text-stone-100/85">
-                {['Next.js', 'React', 'Node.js', 'SEO', 'MERN'].map((item) => (
+                {['Next.js', 'React', 'Node.js', 'Crypto', 'Forex'].map((item) => (
                   <span key={item} className="rounded-full border border-stone-300/20 bg-stone-100/10 px-3 py-2 shadow-[0_12px_25px_rgba(0,0,0,0.18)] backdrop-blur-md">
                     {item}
                   </span>
@@ -114,13 +115,32 @@ export default function HomeClient() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={item.label}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-300/20 bg-stone-100/10 text-lg shadow-[0_12px_25px_rgba(0,0,0,0.22)] transition duration-200 hover:-translate-y-0.5 hover:border-violet-300/60 hover:bg-violet-500/15"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-300/20 bg-stone-100/10 text-lg shadow-[0_12px_25px_rgba(0,0,0,0.22)] transition duration-200 hover:-translate-y-0.5 hover:border-sky-300/60 hover:bg-sky-500/15"
                   >
                     {item.icon}
                   </a>
                 ))}
               </div>
+
             </div>
+
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 480 220"
+              fill="none"
+              className="pointer-events-none absolute bottom-20 right-0 hidden h-44 w-[34rem] opacity-30 lg:block"
+            >
+              <path d="M0 174H480M0 110H480M0 46H480" stroke="white" strokeOpacity=".12" />
+              <path
+                d="m0 164 44-18 33 8 42-49 37 15 36-39 41 22 38-42 33 23 37-45 38 18 42-34 59 20"
+                className="hero-chart-line"
+                stroke="#38bdf8"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <circle cx="480" cy="43" r="4" fill="#7dd3fc" />
+            </svg>
 
           </div>
         </div>
@@ -134,6 +154,7 @@ export default function HomeClient() {
       </section>
 
       <About />
+      <Trading />
       <Projects />
       <Skills />
       <Process />

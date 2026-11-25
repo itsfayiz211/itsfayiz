@@ -158,4 +158,109 @@
   animation: scaleIn 0.3s ease-out;
 }
 
+.hero-chart-line {
+  stroke-dasharray: 720;
+  stroke-dashoffset: 720;
+  animation: chart-draw 2.4s ease-out 0.4s forwards;
+}
+
+.magic-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--magic-columns), minmax(0, 1fr));
+  gap: var(--magic-gap);
+}
+
+.magic-bento-card {
+  background:
+    radial-gradient(
+      circle var(--spotlight-radius) at var(--spotlight-x) var(--spotlight-y),
+      rgba(56, 189, 248, 0.1),
+      transparent 72%
+    ),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  transition:
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.magic-bento-description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.magic-bento-glow:hover {
+  border-color: rgba(125, 211, 252, 0.42);
+  box-shadow: 0 16px 48px rgba(2, 132, 199, 0.1);
+}
+
+.magic-bento-click {
+  animation: bento-click 260ms ease-out;
+}
+
+.flip-card {
+  perspective: 1100px;
+  transform: perspective(1100px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform-style: preserve-3d;
+  transition: transform 220ms ease;
+}
+
+.flip-card-inner {
+  min-height: inherit;
+  transform-style: preserve-3d;
+  transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.flip-card[aria-pressed="true"] .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+@keyframes chart-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes bento-click {
+  50% {
+    transform: scale(0.985);
+  }
+}
+
+@media (max-width: 900px) {
+  .magic-bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .magic-bento-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-chart-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .flip-card,
+  .flip-card-inner,
+  .magic-bento-card {
+    transition-duration: 0.01ms;
+  }
+}
 

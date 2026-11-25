@@ -1,5 +1,22 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Trading performance
+
+The portfolio retrieves current position P&L and six months of fill history
+from Delta Exchange India through `/api/trading/performance`. Configure the
+API key and secret as private server environment variables using `.env.example`
+as a reference. Never use `NEXT_PUBLIC_` variables or commit credentials. The
+integration uses GET requests only and does not place or manage orders.
+
+`TRADING_PUBLIC_METRICS` is a server-side allowlist and defaults to connection
+status, position P&L, realized/unrealized values from open positions, and
+historical performance. Remove any fields you do not want public. Open
+positions and historical daily P&L are grouped by settlement asset. Historical
+P&L is derived from Delta fill position snapshots. When snapshots are
+incomplete, displayed amounts are labelled as known and may be partial; dates
+without a verifiable total remain unavailable rather than estimated. No-fill
+days show `$0.00` only when the six-month snapshot history is complete.
+
 ## Getting Started
 
 First, run the development server:

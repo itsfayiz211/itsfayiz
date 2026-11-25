@@ -17,20 +17,20 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://faaaayize.vercel.app"),
-  title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
+  title: "Fayis K | Full-Stack Developer & Crypto / Forex Trader",
   description:
-    "Fayis K (itsfayiz) is a top full stack developer in Calicut and Kozhikode, creating SEO-ready Next.js and MERN websites with clean design and fast performance.",
+    "Fayis K is a full-stack developer building with Next.js and MERN, and a crypto and forex trader with around two years of market experience.",
   applicationName: "Fayis K Portfolio",
   referrer: "origin-when-cross-origin",
   keywords: [
-    "best full stack developer in Calicut",
+    "full stack developer in Calicut",
     "faaaayize Developer",
     "full stack developer Calicut",
     "full stack developer Kozhikode",
     "Next.js developer Calicut",
     "MERN stack developer Kozhikode",
-    "SEO web developer Calicut",
-    "SEO website designer Kozhikode",
+    "crypto trader Kozhikode",
+    "forex trader Kozhikode",
     "faaaayize",
     "Fayis K",
   ],
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
+    title: "Fayis K | Full-Stack Developer & Crypto / Forex Trader",
     description:
-      "Portfolio and services of Fayis K, a full stack developer focused on Next.js, MERN, SEO, and modern web experiences in Calicut and Kozhikode.",
+      "Portfolio of Fayis K: full-stack development with Next.js and MERN, alongside a personal journey in crypto and forex markets.",
     url: "https://faaaayize.vercel.app",
     siteName: "Fayis K",
     type: "website",
@@ -69,9 +69,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
+    title: "Fayis K | Full-Stack Developer & Crypto / Forex Trader",
     description:
-      "Portfolio of Fayis K, a full stack developer building modern Next.js and MERN websites for businesses in Calicut and Kozhikode.",
+      "Full-stack developer building with Next.js and MERN, and crypto and forex trader with around two years of market experience.",
     images: ["/images/FayizP.jpeg"],
     creator: "@itsfayiz_",
   },
@@ -115,7 +115,7 @@ export default function RootLayout({
               name: "Fayis K",
               alternateName: "itsfayiz",
               url: "https://faaaayize.vercel.app",
-              jobTitle: "Best Full Stack Developer in Kozhikode (Calicut)",
+              jobTitle: "Full-Stack Developer and Crypto & Forex Trader",
               image: "https://faaaayize.vercel.app/images/FayizP.jpeg",
               address: {
                 "@type": "PostalAddress",
