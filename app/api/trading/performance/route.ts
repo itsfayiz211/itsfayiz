@@ -257,11 +257,14 @@ function aggregatePositionPnl(positions: DeltaPosition[]): PositionPnl[] {
   }));
 }
 
-function getSixMonthRange(now: Date) {
+function getTrackingRange(now: Date) {
   const start = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()),
+  );
+  const baselineStart = new Date(
     Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 5, 1),
   );
-  return { start, end: now };
+  return { start, baselineStart, end: now };
 }
 
 function createDeltaHeaders(pathWithQuery: string) {
@@ -319,9 +322,10 @@ async function fetchDelta<T>(
 }
 
 async function loadHistoricalPnl(now: Date): Promise<HistoricalPnl> {
-  const { start, end } = getSixMonthRange(now);
-  const startTime = (start.getTime() * 1000).toString();
+  const { start, baselineStart, end } = getTrackingRange(now);
+  const startTime = (baselineStart.getTime() * 1000).toString();
   const endTime = (end.getTime() * 1000).toString();
+  const trackingStartDate = start.toISOString().slice(0, 10);
   const fills: DeltaFill[] = [];
   let after: string | null | undefined;
   const seenCursors = new Set<string>();
@@ -345,7 +349,7 @@ async function loadHistoricalPnl(now: Date): Promise<HistoricalPnl> {
     seenCursors.add(after);
 
     if (page === MAX_FILL_PAGES - 1) {
-      throw new Error("Six-month fills history exceeds the supported page limit.");
+      throw new Error("Fill history baseline exceeds the supported page limit.");
     }
   }
 
@@ -383,6 +387,8 @@ async function loadHistoricalPnl(now: Date): Promise<HistoricalPnl> {
     }
 
     const previous = snapshots.get(productId);
+    const assetDays = totals.get(asset) ?? new Map();
+    totals.set(asset, assetDays);
     let delta: number | null = null;
     if (!previous) {
       if (realizedPnl === 0) delta = 0;
@@ -392,8 +398,7 @@ async function loadHistoricalPnl(now: Date): Promise<HistoricalPnl> {
     }
     snapshots.set(productId, { realizedPnl, isFlat: size === 0 });
 
-    if (delta === null) continue;
-    const assetDays = totals.get(asset) ?? new Map();
+    if (delta === null || fillDate < trackingStartDate) continue;
     const day = assetDays.get(fillDate) ?? { pnl: 0, fills: 0 };
     day.pnl += delta;
     day.fills += 1;

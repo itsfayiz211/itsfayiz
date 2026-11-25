@@ -34,7 +34,7 @@ export default function FlipCard({ front, back, className = "" }: FlipCardProps)
       onClick={() => setFlipped((value) => !value)}
       onMouseMove={handlePointerMove}
       onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      className={`flip-card group relative block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300 ${className}`}
+      className={`flip-card group relative block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-violet-300 ${className}`}
       style={
         {
           "--tilt-x": `${tilt.x}deg`,
@@ -50,14 +50,14 @@ export default function FlipCard({ front, back, className = "" }: FlipCardProps)
           className="flip-card-face relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/80 p-6"
         >
           {front}
-          <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_var(--glare-x)_var(--glare-y),rgba(125,211,252,0.14),transparent_42%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_var(--glare-x)_var(--glare-y),rgba(167,139,250,0.14),transparent_42%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </span>
         <span
           aria-hidden={!flipped}
-          className="flip-card-face flip-card-back absolute inset-0 flex h-full w-full flex-col overflow-hidden rounded-2xl border border-sky-300/20 bg-neutral-900 p-6"
+          className="flip-card-face flip-card-back absolute inset-0 flex h-full w-full flex-col overflow-hidden rounded-2xl border border-violet-300/20 bg-neutral-900 p-6"
         >
           {back}
-          <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_var(--glare-x)_var(--glare-y),rgba(125,211,252,0.13),transparent_42%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_var(--glare-x)_var(--glare-y),rgba(167,139,250,0.13),transparent_42%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </span>
       </span>
     </button>

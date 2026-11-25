@@ -174,7 +174,7 @@
   background:
     radial-gradient(
       circle var(--spotlight-radius) at var(--spotlight-x) var(--spotlight-y),
-      rgba(56, 189, 248, 0.1),
+      rgba(139, 92, 246, 0.1),
       transparent 72%
     ),
     linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
@@ -193,8 +193,8 @@
 }
 
 .magic-bento-glow:hover {
-  border-color: rgba(125, 211, 252, 0.42);
-  box-shadow: 0 16px 48px rgba(2, 132, 199, 0.1);
+  border-color: rgba(196, 181, 253, 0.42);
+  box-shadow: 0 16px 48px rgba(139, 92, 246, 0.1);
 }
 
 .magic-bento-click {
