@@ -3,10 +3,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Trading performance
 
 The portfolio retrieves current position P&L and six months of fill history
-from Delta Exchange India through `/api/trading/performance`. Configure the
-API key and secret as private server environment variables using `.env.example`
-as a reference. Never use `NEXT_PUBLIC_` variables or commit credentials. The
-integration uses GET requests only and does not place or manage orders.
+from Delta Exchange India through `/api/trading/performance`. Configure
+`DELTA_EXCHANGE_API_KEY` and `DELTA_EXCHANGE_API_SECRET` as private server
+environment variables in your deployment platform or local `.env` file. Never
+use `NEXT_PUBLIC_` variables or commit credentials. The integration uses GET
+requests only and does not place or manage orders.
 
 `TRADING_PUBLIC_METRICS` is a server-side allowlist and defaults to connection
 status, position P&L, realized/unrealized values from open positions, and
