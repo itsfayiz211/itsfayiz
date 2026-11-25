@@ -414,7 +414,7 @@ export async function GET() {
         publicMetrics,
         ...(publicMetrics.includes("historicalPerformance") && {
           historyError:
-            "Historical fills could not be loaded. Check the exchange connection and try again.",
+            "Delta Exchange data could not be loaded. Check the server-side Vercel environment variables and API permissions, then redeploy.",
         }),
       } satisfies PerformanceResponse,
       { status: 502, headers: { "Cache-Control": "no-store" } },
