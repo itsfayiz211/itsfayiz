@@ -85,16 +85,57 @@ type PerformanceResponse = {
 };
 
 class DeltaExchangeError extends Error {
-  constructor(readonly status: number) {
+  constructor(
+    readonly status: number,
+    readonly code: string | null,
+  ) {
     super(`Delta Exchange returned HTTP ${status}`);
     this.name = "DeltaExchangeError";
   }
 }
 
+function getDeltaErrorCode(payload: unknown): string | null {
+  if (
+    typeof payload !== "object" ||
+    payload === null ||
+    !("error" in payload)
+  ) {
+    return null;
+  }
+
+  const error = payload.error;
+  if (typeof error === "string") return error;
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    typeof error.code === "string"
+  ) {
+    return error.code;
+  }
+  return null;
+}
+
 function getPublicFailureMessage(error: unknown): string {
   if (error instanceof DeltaExchangeError) {
+    const code = error.code?.toLowerCase().replace(/[^a-z]/g, "");
+    if (code === "invalidapikey") {
+      return "Delta says this API key is invalid or inactive. Check that the active key belongs to Delta India.";
+    }
+    if (code === "unauthorizedapiaccess") {
+      return "Delta says this API key lacks permission for the requested account endpoint.";
+    }
+    if (code === "ipnotwhitelistedforapikey") {
+      return "Delta rejected the request because its server IP is not whitelisted for this API key.";
+    }
+    if (code === "signatureexpired") {
+      return "Delta says the request signature expired. Check the server timestamp and network delay.";
+    }
+    if (code === "signaturemismatch") {
+      return "Delta says the request signature does not match. Verify the key/secret pair and signature format.";
+    }
     if (error.status === 401) {
-      return "Delta rejected the API credentials or request signature (HTTP 401). Verify the Delta India key and secret.";
+      return "Delta rejected authentication (HTTP 401). Check the API key, secret, permissions, and any key restrictions.";
     }
     if (error.status === 403) {
       return "Delta denied the request (HTTP 403). Check API permissions and account restrictions.";
@@ -223,7 +264,11 @@ async function fetchDelta<T>(
   });
 
   if (!response.ok) {
-    throw new DeltaExchangeError(response.status);
+    const errorPayload: unknown = await response.json().catch(() => null);
+    throw new DeltaExchangeError(
+      response.status,
+      getDeltaErrorCode(errorPayload),
+    );
   }
 
   const payload = (await response.json()) as DeltaResponse<T>;
