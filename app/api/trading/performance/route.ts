@@ -400,8 +400,11 @@ export async function GET() {
     return Response.json(withPublicMetrics(value, publicMetrics), {
       headers: { "Cache-Control": "no-store" },
     });
-  } catch {
-    console.error("Unable to load public Delta Exchange performance data.");
+  } catch (error) {
+    console.error(
+      "Unable to load public Delta Exchange performance data.",
+      error instanceof Error ? error.message : String(error),
+    );
     return Response.json(
       {
         status: publicMetrics.includes("connectionStatus")
