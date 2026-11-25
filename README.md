@@ -7,7 +7,10 @@ from Delta Exchange India through `/api/trading/performance`. Configure
 `DELTA_EXCHANGE_API_KEY` and `DELTA_EXCHANGE_API_SECRET` as private server
 environment variables in your deployment platform or local `.env` file. Never
 use `NEXT_PUBLIC_` variables or commit credentials. The integration uses GET
-requests only and does not place or manage orders.
+requests only and does not place or manage orders. For Vercel, add both
+variables under Project Settings → Environment Variables for Production (and
+Preview if needed), then redeploy. GitHub `.env` ignore rules do not configure
+Vercel environment variables.
 
 `TRADING_PUBLIC_METRICS` is a server-side allowlist and defaults to connection
 status, position P&L, realized/unrealized values from open positions, and
