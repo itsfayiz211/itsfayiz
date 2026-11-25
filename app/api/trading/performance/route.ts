@@ -1,4 +1,5 @@
 import { createHmac } from "node:crypto";
+import { isIP } from "node:net";
 
 type PublicMetric =
   | "connectionStatus"
@@ -88,6 +89,7 @@ class DeltaExchangeError extends Error {
   constructor(
     readonly status: number,
     readonly code: string | null,
+    readonly sourceIp: string | null,
   ) {
     super(`Delta Exchange returned HTTP ${status}`);
     this.name = "DeltaExchangeError";
@@ -116,6 +118,25 @@ function getDeltaErrorCode(payload: unknown): string | null {
   return null;
 }
 
+function findIpAddress(value: unknown, depth = 0): string | null {
+  if (depth > 4) return null;
+  if (typeof value === "string" && isIP(value)) return value;
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const ip = findIpAddress(item, depth + 1);
+      if (ip) return ip;
+    }
+    return null;
+  }
+  if (typeof value === "object" && value !== null) {
+    for (const item of Object.values(value)) {
+      const ip = findIpAddress(item, depth + 1);
+      if (ip) return ip;
+    }
+  }
+  return null;
+}
+
 function getPublicFailureMessage(error: unknown): string {
   if (error instanceof DeltaExchangeError) {
     const code = error.code?.toLowerCase().replace(/[^a-z]/g, "");
@@ -126,7 +147,7 @@ function getPublicFailureMessage(error: unknown): string {
       return "Delta says this API key lacks permission for the requested account endpoint.";
     }
     if (code === "ipnotwhitelistedforapikey") {
-      return "Delta rejected the request because its server IP is not whitelisted for this API key.";
+      return "Delta rejected the request because its server IP is not whitelisted for this API key. Check Vercel Runtime Logs for the source IP.";
     }
     if (code === "signatureexpired") {
       return "Delta says the request signature expired. Check the server timestamp and network delay.";
@@ -154,6 +175,20 @@ function getPublicFailureMessage(error: unknown): string {
   }
 
   return "The Delta API request failed. Check the Vercel Runtime Logs for details.";
+}
+
+function getSafeErrorDetails(error: unknown) {
+  if (error instanceof DeltaExchangeError) {
+    return {
+      status: error.status,
+      code: error.code,
+      sourceIp: error.sourceIp,
+    };
+  }
+  if (error instanceof Error) {
+    return { name: error.name, message: error.message };
+  }
+  return { message: "Unknown Delta Exchange error" };
 }
 
 function getPublicMetrics(): PublicMetric[] {
@@ -265,9 +300,14 @@ async function fetchDelta<T>(
 
   if (!response.ok) {
     const errorPayload: unknown = await response.json().catch(() => null);
+    const code = getDeltaErrorCode(errorPayload);
     throw new DeltaExchangeError(
       response.status,
-      getDeltaErrorCode(errorPayload),
+      code,
+      code?.toLowerCase().replace(/[^a-z]/g, "") ===
+        "ipnotwhitelistedforapikey"
+        ? findIpAddress(errorPayload)
+        : null,
     );
   }
 
@@ -409,7 +449,10 @@ async function loadPerformance(
     try {
       result.historicalPnl = await loadHistoricalPnl(now);
     } catch (error) {
-      console.error("Unable to load six-month Delta Exchange fills history.", error);
+      console.error(
+        "Unable to load six-month Delta Exchange fills history.",
+        getSafeErrorDetails(error),
+      );
       result.historyError = getPublicFailureMessage(error);
     }
   }
@@ -479,7 +522,7 @@ export async function GET() {
   } catch (error) {
     console.error(
       "Unable to load public Delta Exchange performance data.",
-      error instanceof Error ? error.message : String(error),
+      getSafeErrorDetails(error),
     );
     return Response.json(
       {
