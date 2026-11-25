@@ -84,6 +84,37 @@ type PerformanceResponse = {
   historyError?: string;
 };
 
+class DeltaExchangeError extends Error {
+  constructor(readonly status: number) {
+    super(`Delta Exchange returned HTTP ${status}`);
+    this.name = "DeltaExchangeError";
+  }
+}
+
+function getPublicFailureMessage(error: unknown): string {
+  if (error instanceof DeltaExchangeError) {
+    if (error.status === 401) {
+      return "Delta rejected the API credentials or request signature (HTTP 401). Verify the Delta India key and secret.";
+    }
+    if (error.status === 403) {
+      return "Delta denied the request (HTTP 403). Check API permissions and account restrictions.";
+    }
+    if (error.status === 429) {
+      return "Delta rate-limited the request (HTTP 429). Try again shortly.";
+    }
+    return `Delta returned HTTP ${error.status}. Check the Delta API response in Vercel Runtime Logs.`;
+  }
+
+  if (
+    error instanceof Error &&
+    (error.name === "TimeoutError" || error.name === "AbortError")
+  ) {
+    return "The Delta API request timed out. Check the Vercel Runtime Logs and try again.";
+  }
+
+  return "The Delta API request failed. Check the Vercel Runtime Logs for details.";
+}
+
 function getPublicMetrics(): PublicMetric[] {
   const configured =
     process.env.TRADING_PUBLIC_METRICS ??
@@ -192,7 +223,7 @@ async function fetchDelta<T>(
   });
 
   if (!response.ok) {
-    throw new Error(`Delta Exchange returned HTTP ${response.status}`);
+    throw new DeltaExchangeError(response.status);
   }
 
   const payload = (await response.json()) as DeltaResponse<T>;
@@ -334,8 +365,7 @@ async function loadPerformance(
       result.historicalPnl = await loadHistoricalPnl(now);
     } catch (error) {
       console.error("Unable to load six-month Delta Exchange fills history.", error);
-      result.historyError =
-        "Six-month history is temporarily unavailable. Current position data is still live.";
+      result.historyError = getPublicFailureMessage(error);
     }
   }
 
@@ -415,7 +445,7 @@ export async function GET() {
         publicMetrics,
         ...(publicMetrics.includes("historicalPerformance") && {
           historyError:
-            "Delta Exchange data could not be loaded. Check the server-side Vercel environment variables and API permissions, then redeploy.",
+            getPublicFailureMessage(error),
         }),
       } satisfies PerformanceResponse,
       { status: 502, headers: { "Cache-Control": "no-store" } },
