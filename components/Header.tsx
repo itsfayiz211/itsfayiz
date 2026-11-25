@@ -24,7 +24,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const links = ["home", "about", "projects", "skills", "process", "contact"];
+  const links = ["home", "about", "trading", "projects", "skills", "process", "contact"];
 
   return (
     <div
@@ -38,7 +38,7 @@ export default function Header() {
           </div>
           <div>
             <h2 className="text-lg font-semibold tracking-wide text-white sm:text-xl">Fayis K</h2>
-            <p className="text-[0.65rem] uppercase tracking-[0.35em] text-stone-200/80">Best Full Stack Developer</p>
+            <p className="text-[0.65rem] uppercase tracking-[0.2em] text-stone-200/80">Developer · Trader</p>
           </div>
         </div>
 

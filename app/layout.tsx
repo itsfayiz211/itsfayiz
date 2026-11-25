@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
-import SplashCursor from "@/components/SplashCursor";
+// import SplashCursor from "@/components/SplashCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,28 +16,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://itsfayiz.vercel.app"),
-  title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
+  metadataBase: new URL("https://faaaayize.vercel.app"),
+  title: "Fayis K | Full-Stack Developer & Crypto / Forex Trader",
   description:
-    "Fayis K (itsfayiz) is a top full stack developer in Calicut and Kozhikode, creating SEO-ready Next.js and MERN websites with clean design and fast performance.",
+    "Fayis K is a full-stack developer building with Next.js and MERN, and a crypto and forex trader with around two years of market experience.",
   applicationName: "Fayis K Portfolio",
   referrer: "origin-when-cross-origin",
   keywords: [
-    "best full stack developer in Calicut",
-    "itsfayiz developer",
+    "full stack developer in Calicut",
+    "faaaayize Developer",
     "full stack developer Calicut",
     "full stack developer Kozhikode",
     "Next.js developer Calicut",
     "MERN stack developer Kozhikode",
-    "SEO web developer Calicut",
-    "SEO website designer Kozhikode",
-    "itsfayiz",
+    "crypto trader Kozhikode",
+    "forex trader Kozhikode",
+    "faaaayize",
     "Fayis K",
   ],
-  authors: [{ name: "Fayis K", url: "https://itsfayiz.vercel.app" }],
+  authors: [{ name: "Fayis K", url: "https://faaaayize.vercel.app" }],
   creator: "Fayis K",
   alternates: {
-    canonical: "https://itsfayiz.vercel.app/",
+    canonical: "https://faaaayize.vercel.app/",
   },
   robots: {
     index: true,
@@ -51,10 +51,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
+    title: "Fayis K | Full-Stack Developer & Crypto / Forex Trader",
     description:
-      "Portfolio and services of Fayis K, a full stack developer focused on Next.js, MERN, SEO, and modern web experiences in Calicut and Kozhikode.",
-    url: "https://itsfayiz.vercel.app",
+      "Portfolio of Fayis K: full-stack development with Next.js and MERN, alongside a personal journey in crypto and forex markets.",
+    url: "https://faaaayize.vercel.app",
     siteName: "Fayis K",
     type: "website",
     locale: "en_US",
@@ -69,9 +69,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fayis K | Best Full Stack Developer in Calicut & Kozhikode",
+    title: "Fayis K | Full-Stack Developer & Crypto / Forex Trader",
     description:
-      "Portfolio of Fayis K, a full stack developer building modern Next.js and MERN websites for businesses in Calicut and Kozhikode.",
+      "Full-stack developer building with Next.js and MERN, and crypto and forex trader with around two years of market experience.",
     images: ["/images/FayizP.jpeg"],
     creator: "@itsfayiz_",
   },
@@ -79,9 +79,9 @@ export const metadata: Metadata = {
     google: "DB5Gh4M12iv__kVlCpYUfuik3agpyIypBUYKR_gWGfw",
   },
   icons: {
-    icon: "/images/Fayiz.png",
-    shortcut: "/images/Fayiz.png",
-    apple: "/images/Fayiz.png",
+    icon: "/images/FayizP.png",
+    shortcut: "/images/FayizP.png",
+    apple: "/images/FayizP.png",
   },
 };
 
@@ -93,7 +93,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <SplashCursor
+        {/* <SplashCursor
           DENSITY_DISSIPATION={3.5}
           VELOCITY_DISSIPATION={2}
           PRESSURE={0.1}
@@ -105,7 +105,8 @@ export default function RootLayout({
           RAINBOW_MODE={false}
           COLOR="#A855F7"
         />
-        <script
+       */}
+         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -113,9 +114,9 @@ export default function RootLayout({
               "@type": "Person",
               name: "Fayis K",
               alternateName: "itsfayiz",
-              url: "https://itsfayiz.vercel.app/",
-              jobTitle: "Best Full Stack Developer in Kozhikode (Calicut)",
-              image: "https://itsfayiz.vercel.app/images/FayizP.jpeg",
+              url: "https://faaaayize.vercel.app",
+              jobTitle: "Full-Stack Developer and Crypto & Forex Trader",
+              image: "https://faaaayize.vercel.app/images/FayizP.jpeg",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Kozhikode",

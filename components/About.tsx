@@ -18,7 +18,8 @@ export default function About() {
         <div className="md:w-1/2 w-full space-y-6 text-center md:text-left">
 
           <p className="text-base sm:text-lg md:text-xl leading-relaxed sm:leading-loose">
-            As a skilled <span className="text-violet-400 font-semibold">MERN Stack & Next.js Developer</span> with 1+ year of experience building real-world projects, I specialize in creating scalable, efficient, and user-friendly web applications. I’m eager to bring my expertise in full-stack development and problem-solving to innovative projects that drive business success and improve user experiences.
+            I&apos;m a <span className="text-violet-400 font-semibold">Full-Stack Developer</span>{" "}
+            building practical, user-friendly applications with the MERN stack and Next.js. Alongside development, I&apos;ve spent approximately two years studying and trading cryptocurrency and forex markets. Exploring both disciplines keeps me curious about how thoughtful technology can support better decisions.
           </p>
 
         </div>

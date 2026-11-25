@@ -81,8 +81,10 @@ export default function Chatbot({
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [overlapsContactSubmit, setOverlapsContactSubmit] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -95,6 +97,40 @@ export default function Chatbot({
       setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    const contactSection = document.getElementById('contact');
+    if (!contactSection) return;
+
+    const updateVisibility = () => {
+      const launcher = toggleButtonRef.current;
+      const submitButton = contactSection.querySelector<HTMLButtonElement>(
+        'button[type="submit"]'
+      );
+      if (!launcher || !submitButton) return;
+
+      const launcherBounds = launcher.getBoundingClientRect();
+      const submitBounds = submitButton.getBoundingClientRect();
+      setOverlapsContactSubmit(
+        launcherBounds.left < submitBounds.right &&
+          launcherBounds.right > submitBounds.left &&
+          launcherBounds.top < submitBounds.bottom &&
+          launcherBounds.bottom > submitBounds.top
+      );
+    };
+    const observer = new IntersectionObserver(updateVisibility);
+
+    observer.observe(contactSection);
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility);
+    updateVisibility();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', updateVisibility);
+      window.removeEventListener('resize', updateVisibility);
+    };
+  }, []);
 
   const sendMessage = async (text: string) => {
     if (!text.trim() || isTyping) return;
@@ -156,20 +192,24 @@ export default function Chatbot({
 
 const cardBg = isLight ? 'bg-white border-gray-200' : 'bg-neutral-950 border-white/10';
   const headerBg = isLight ? 'bg-gradient-to-r from-neutral-950 to-neutral-900' : 'bg-gradient-to-r from-neutral-900 to-neutral-950';
+const hideLauncher = overlapsContactSubmit && !isOpen;
 
   return (
     <>
       {/* ── Floating Button ── */}
       <button
+        ref={toggleButtonRef}
         id="chatbot-toggle"
         onClick={isOpen ? onClose : onOpen}
-        className={`fixed  bottom-6 right-6  z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 ${
+        className={`fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-2xl transition-all duration-300 ${
           isOpen
             ? 'bg-gray-700 scale-95'
             : 'bg-gradient-to-br from-violet-500 to-fuchsia-500 hover:scale-110'
-        }`}
+        } ${hideLauncher ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
         style={!isOpen ? { animation: 'pulse-glow 2s ease-in-out infinite' } : {}}
-        aria-label="Open AI Chat"
+        aria-label={isOpen ? 'Close AI Chat' : 'Open AI Chat'}
+        aria-hidden={hideLauncher}
+        tabIndex={hideLauncher ? -1 : undefined}
       >
         {isOpen ? (
           <X size={22} className="text-white" />
