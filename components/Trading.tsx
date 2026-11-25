@@ -100,6 +100,7 @@ function MiniPnlCalendar({
   days,
   asset,
   historyComplete,
+  startDate,
   latestDate,
   onSelectDay,
 }: {
@@ -108,6 +109,7 @@ function MiniPnlCalendar({
   days: Map<string, CalendarDay>;
   asset: string;
   historyComplete: boolean;
+  startDate: string;
   latestDate: string;
   onSelectDay: (day: CalendarDay) => void;
 }) {
@@ -135,11 +137,15 @@ function MiniPnlCalendar({
   );
   const monthTotal = monthDays.reduce((sum, day) => sum + (day?.pnl ?? 0), 0);
   const monthFills = monthDays.reduce((sum, day) => sum + (day?.fills ?? 0), 0);
-  const monthPnlLabel = historyComplete
-    ? formatAmount(monthTotal, asset)
-    : monthFills
-      ? `Known ${formatAmount(monthTotal, asset)}`
-      : "P&L unavailable";
+  const monthStartDate = `${year}-${String(month + 1).padStart(2, "0")}-01`;
+  const monthPnlLabel =
+    monthStartDate > latestDate
+      ? "Upcoming"
+      : historyComplete
+        ? formatAmount(monthTotal, asset)
+        : monthFills
+          ? `Known ${formatAmount(monthTotal, asset)}`
+          : "P&L unavailable";
 
   return (
     <article className="rounded-xl border border-white/[0.08] bg-white/[0.025] p-2 sm:p-2.5">
@@ -167,7 +173,9 @@ function MiniPnlCalendar({
             return <span key={`empty-${index}`} className="aspect-square" />;
           }
           const fullDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
-          const isPastOrCurrentDate = fullDate <= latestDate;
+          const beforeTrackingStart = fullDate < startDate;
+          const isPastOrCurrentDate =
+            !beforeTrackingStart && fullDate <= latestDate;
           const calendarDay =
             day ??
             (historyComplete && isPastOrCurrentDate
@@ -187,7 +195,9 @@ function MiniPnlCalendar({
                   : "transparent";
           const description = calendarDay
             ? `${fullDate}: ${historyComplete ? "" : "Known "}${formatAmount(calendarDay.pnl, asset)} realized P&L from ${calendarDay.fills} ${calendarDay.fills === 1 ? "fill" : "fills"}`
-            : isPastOrCurrentDate
+            : beforeTrackingStart
+              ? `${fullDate}: tracking starts ${startDate}`
+              : isPastOrCurrentDate
                 ? `${fullDate}: P&L unavailable because the exchange history is incomplete`
                 : `${fullDate}: future date`;
 
@@ -273,26 +283,29 @@ export default function Trading() {
   const dailyPnl = new Map(
     (activeAsset?.days ?? []).map((day) => [day.date, day]),
   );
-  const sixMonthPnl = (activeAsset?.days ?? []).reduce(
+  const trackedPnl = (activeAsset?.days ?? []).reduce(
     (total, day) => total + day.pnl,
     0,
   );
-  const sixMonthFills = (activeAsset?.days ?? []).reduce(
+  const trackedFills = (activeAsset?.days ?? []).reduce(
     (total, day) => total + day.fills,
     0,
   );
   const historyIncomplete =
     (performance?.historicalPnl?.incompleteProducts ?? 0) > 0;
   const historyComplete = !historyIncomplete;
+  const startDate =
+    performance?.historicalPnl?.from.slice(0, 10) ??
+    new Date().toISOString().slice(0, 10);
   const latestDate =
     performance?.historicalPnl?.to.slice(0, 10) ??
     new Date().toISOString().slice(0, 10);
-  const currentMonth = new Date();
+  const currentMonth = new Date(`${startDate}T00:00:00.000Z`);
   const calendarMonths = Array.from({ length: 6 }, (_, index) => {
     const date = new Date(
       Date.UTC(
         currentMonth.getUTCFullYear(),
-        currentMonth.getUTCMonth() - (5 - index),
+        currentMonth.getUTCMonth() + index,
         1,
       ),
     );
@@ -304,15 +317,15 @@ export default function Trading() {
       id="trading"
       className="relative overflow-hidden bg-neutral-950 px-5 py-20 text-white sm:px-8 md:px-12 md:py-28"
     >
-      <div className="pointer-events-none absolute -right-36 top-20 h-80 w-80 rounded-full bg-sky-500/[0.06] blur-3xl" />
+      <div className="pointer-events-none absolute -right-36 top-20 h-80 w-80 rounded-full bg-violet-500/[0.06] blur-3xl" />
       <div className="relative mx-auto max-w-7xl">
         <div className="mb-12 max-w-2xl">
-          <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-sky-300">
+          <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-violet-300">
             <Sparkles size={14} /> Markets, mindset &amp; making
           </p>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
             Trading is part of
-            <span className="text-sky-300"> my journey.</span>
+            <span className="text-violet-300"> my journey.</span>
           </h2>
           <p className="mt-5 max-w-xl text-sm leading-7 text-neutral-400 sm:text-base">
             Around two years learning across crypto and forex — alongside the
@@ -342,22 +355,22 @@ export default function Trading() {
         <div className="mt-20 border-t border-white/10 pt-12">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div className="max-w-xl">
-              <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-sky-300">
+              <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-violet-300">
                 <Activity size={14} /> Account overview
               </p>
               <h3 className="text-2xl font-semibold tracking-tight sm:text-3xl">
                 Live trading performance
               </h3>
               <p className="mt-3 text-sm leading-6 text-neutral-400">
-                Live positions and six months of realized performance from
-                Delta Exchange India.
+                Live positions and realized P&amp;L tracking from today, with
+                a six-month forward calendar from Delta Exchange India.
               </p>
             </div>
             <button
               type="button"
               onClick={() => setRefreshKey((value) => value + 1)}
               disabled={loading}
-              className="inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-full border border-white/15 px-4 py-2 text-sm text-neutral-200 transition hover:border-sky-300/50 hover:text-white disabled:cursor-wait disabled:opacity-50 sm:self-auto"
+              className="inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-full border border-white/15 px-4 py-2 text-sm text-neutral-200 transition hover:border-violet-300/50 hover:text-white disabled:cursor-wait disabled:opacity-50 sm:self-auto"
             >
               <RefreshCw size={15} className={loading ? "animate-spin" : ""} />
               Refresh data
@@ -499,14 +512,14 @@ export default function Trading() {
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <CalendarDays size={18} className="text-sky-300" />
-                    <h4 className="font-medium">Six-month P&amp;L calendar</h4>
+                    <CalendarDays size={18} className="text-violet-300" />
+                    <h4 className="font-medium">P&amp;L from today · six-month calendar</h4>
                   </div>
                   <p className="mt-2 text-sm leading-6 text-neutral-400">
-                    Daily realized P&amp;L from exchange fills. Green days are
-                    positive; red days are negative. Select a date to see its
-                    amount. No-fill dates show $0.00 only when history is
-                    complete.
+                    Daily realized P&amp;L from today onward, based on exchange
+                    fills. Green days are positive; red days are negative.
+                    Select a traded date to see its exact amount. Future dates
+                    stay blank until actual fills occur.
                   </p>
                 </div>
                 {historyAssets.length > 1 && (
@@ -518,7 +531,7 @@ export default function Trading() {
                         setSelectedAsset(event.target.value);
                         setSelectedDay(null);
                       }}
-                      className="min-h-11 w-full appearance-none rounded-xl border border-white/10 bg-neutral-900 px-4 pr-10 text-sm text-neutral-100 outline-none focus:border-sky-300/50 sm:w-auto"
+                      className="min-h-11 w-full appearance-none rounded-xl border border-white/10 bg-neutral-900 px-4 pr-10 text-sm text-neutral-100 outline-none focus:border-violet-300/50 sm:w-auto"
                     >
                       {historyAssets.map((item) => (
                         <option key={item.asset} value={item.asset}>
@@ -539,18 +552,18 @@ export default function Trading() {
                   <div>
                     <p className="text-xs uppercase tracking-[0.16em] text-neutral-500">
                       {historyIncomplete
-                        ? "Known six-month realized P&L"
-                        : "Six-month realized P&L"}{" "}
+                        ? "Known realized P&L since today"
+                        : "Realized P&L since today"}{" "}
                       · {activeAsset.asset}
                     </p>
-                    <p className={`mt-1 text-xl font-semibold ${pnlColor(sixMonthPnl)}`}>
-                      {sixMonthFills || historyComplete
-                        ? formatAmount(sixMonthPnl, activeAsset.asset)
+                    <p className={`mt-1 text-xl font-semibold ${pnlColor(trackedPnl)}`}>
+                      {trackedFills || historyComplete
+                        ? formatAmount(trackedPnl, activeAsset.asset)
                         : "Incomplete"}
                     </p>
                   </div>
                   <p className="text-xs text-neutral-500">
-                    {sixMonthFills} fills included
+                    {trackedFills} fills included
                   </p>
                 </div>
               )}
@@ -571,8 +584,8 @@ export default function Trading() {
               ) : !activeAsset ? (
                 <p className="mt-6 text-sm text-neutral-400">
                   {performance?.status === "connected"
-                    ? "No fill history was returned for the last six months."
-                    : "Connect Delta Exchange to load your six months of fill history."}
+                    ? "No settlement asset or fills are available yet. The calendar will populate when Delta returns actual fills."
+                    : "Connect Delta Exchange to start tracking realized P&L from today."}
                 </p>
               ) : (
                 <>
@@ -585,6 +598,7 @@ export default function Trading() {
                         days={dailyPnl}
                         asset={activeAsset.asset}
                         historyComplete={historyComplete}
+                        startDate={startDate}
                         latestDate={latestDate}
                         onSelectDay={(day) => setSelectedDay(day)}
                       />

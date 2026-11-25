@@ -2,8 +2,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Trading performance
 
-The portfolio retrieves current position P&L and six months of fill history
-from Delta Exchange India through `/api/trading/performance`. Configure
+The portfolio retrieves current position P&L and realized P&L from today onward
+from Delta Exchange India through `/api/trading/performance`. The UI displays
+the current month and next five months; future dates remain blank until fills
+occur. The server fetches a six-month fill baseline to calculate daily P&L
+changes, but displays only dates from the current UTC day. Configure
 `DELTA_EXCHANGE_API_KEY` and `DELTA_EXCHANGE_API_SECRET` as private server
 environment variables in your deployment platform or local `.env` file. Never
 use `NEXT_PUBLIC_` variables or commit credentials. The integration uses GET
@@ -19,7 +22,7 @@ positions and historical daily P&L are grouped by settlement asset. Historical
 P&L is derived from Delta fill position snapshots. When snapshots are
 incomplete, displayed amounts are labelled as known and may be partial; dates
 without a verifiable total remain unavailable rather than estimated. No-fill
-days show `$0.00` only when the six-month snapshot history is complete.
+days from today show `$0.00` only when the fill snapshot baseline is complete.
 
 ## Getting Started
 

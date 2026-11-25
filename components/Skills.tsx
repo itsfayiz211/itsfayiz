@@ -71,7 +71,7 @@ export default function Skills() {
                   transition-all duration-300
                   ${skill.bgClass || ""}
                   ${isActive
-                    ? "ring-2 ring-cyan-400 shadow-[0_0_20px_#06b6d4]"
+                    ? "ring-2 ring-violet-400 shadow-[0_0_20px_#8b5cf6]"
                     : "shadow-lg hover:shadow-xl"}
                 `}
               >
@@ -89,7 +89,7 @@ export default function Skills() {
 
               <p
                 className={`mt-2 text-xs sm:text-sm md:text-base transition ${
-                  isActive ? "text-cyan-400" : "text-gray-300"
+                  isActive ? "text-violet-400" : "text-gray-300"
                 }`}
               >
                 {skill.name}
@@ -106,7 +106,7 @@ export default function Skills() {
           animate={{ opacity: 1, y: 0 }}
           className="mt-8 md:mt-10 max-w-xl text-center px-4"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-violet-400 mb-2">
             {activeSkill}
           </h2>
 

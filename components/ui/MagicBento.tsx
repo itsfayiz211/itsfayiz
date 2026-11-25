@@ -89,10 +89,10 @@ export default function MagicBento({
         const content = (
           <>
             <div className="mb-5 flex items-start justify-between gap-4">
-              <span className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-sky-300/80">
+              <span className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-violet-300/80">
                 {card.eyebrow}
               </span>
-              {card.icon && <span className="text-sky-300">{card.icon}</span>}
+              {card.icon && <span className="text-violet-300">{card.icon}</span>}
             </div>
             <h3 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
               {card.title}
@@ -117,7 +117,7 @@ export default function MagicBento({
                 <path d="M1 74H299M1 46H299M1 18H299" stroke="white" strokeOpacity=".08" />
                 <motion.path
                   d="m2 70 29-8 22 5 26-28 25 12 23-19 24 11 22-25 23 14 25-18 25 8 28-17 20 7"
-                  stroke="#38bdf8"
+                  stroke="#a78bfa"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -126,11 +126,11 @@ export default function MagicBento({
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 1.4, delay: index * 0.08, ease: "easeOut" }}
                 />
-                <circle cx="298" cy="12" r="3" fill="#7dd3fc" />
+                <circle cx="298" cy="12" r="3" fill="#c4b5fd" />
               </svg>
             )}
             {card.href && (
-              <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-medium text-sky-300">
+              <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-medium text-violet-300">
                 Explore project <span aria-hidden="true">↗</span>
               </span>
             )}
